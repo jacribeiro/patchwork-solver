@@ -10,15 +10,9 @@ class PatchworkGame:
         self.next_player = 0
 
     def calculate_next_player(player_0: Player, player_1: Player) -> Player:
-        if player_0.time == player_1.time:
-            if player_0.is_above:
-                return player_0
-            else: 
-                return player_1
-        elif player_0.time > player_1.time:
-            return player_1
-        else:
-            return player_0
+        if player_0.time != player_1.time:
+            return min(player_0, player_1, key=lambda p: p.time)
+        return player_0 if player_0.is_above() else player_1
         
 class Piece:
     def __init__(self, button_cost: int, time_cost: int, income_buttons: int, shape: list[tuple[int]]):
